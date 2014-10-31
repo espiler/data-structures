@@ -12,7 +12,7 @@ HashTable.prototype.insert = function(k, v){
   }
   this._storage[index].push({ key: k, val: v});
   this._size++;
-  if(this._size === this._limit - 1){
+  if(this._size > this._limit * 0.75){
       this.resize(2);
     }
 };
@@ -38,7 +38,7 @@ HashTable.prototype.remove = function(k){
       this._storage[index].splice(i,1);
       if (this._storage[index].length === 0) {}
       this._size--;
-      if(this._size === this._limit / 2 - 2 && this._limit > 8){
+      if(this._size <= this._limit * 0.25 && this._limit > 8){
         this.resize(0.5);
       }
     }
@@ -48,20 +48,17 @@ HashTable.prototype.remove = function(k){
 
 HashTable.prototype.resize = function(factor){
   this._limit *= factor;
-  this.rehash();
-}
-
-HashTable.prototype.rehash = function(){
   var copy = this._storage;
-
   this._size = 0;
   this._storage = makeLimitedArray(this._limit);
-  for(var prop in copy){
-    for (var i=0; i<copy[prop].length; i++) {
-      this.insert(copy[prop][i].key, copy[prop][i].val);
+  var props = Object.keys(copy);
+  for (var k=0; k<props.length; k++) {
+    for (var i=0; i<copy[props[k]].length; i++) {
+      this.insert(copy[props[k]][i].key, copy[props[k]][i].val);
     }
   }
 }
+
 
 /*
  * Complexity: What is the time complexity of the above functions?
