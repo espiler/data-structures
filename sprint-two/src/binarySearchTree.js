@@ -7,32 +7,45 @@ var makeBinarySearchTree = function(value){
 };
 
 var binarySearchTreeMethods = {
+
   insert: function(value){
     if(value < this.value){
-      if(this[next])
+      this.left ? this.left.insert(value) :
+        this.left = makeBinarySearchTree(value);
     }
     if(value > this.value){
-
+      this.right ? this.right.insert(value) :
+        this.right = makeBinarySearchTree(value);
     }
   },
+
   contains: function(value){
     if(value === this.value){
       return true;
     }
     if(value < this.value){
-
+      return this.left ? this.left.contains(value) : false;
     }
     if(value > this.value){
-
+      return this.right ? this.right.contains(value) : false;
     }
-
   },
-  depthFirstlog: function (callback){
 
+  depthFirstLog: function (callback){
+    callback(this.value);
+    if(this.left){
+      this.left.depthFirstLog(callback);
+    }
+    if(this.right){
+      this.right.depthFirstLog(callback);
+    }
   }
-}
+};
 
 
 /*
  * Complexity: What is the time complexity of the above functions?
+ depthFirstLog: O(n)
+ insert: O(log n)
+ contains: O(log n)
  */

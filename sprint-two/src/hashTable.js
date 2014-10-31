@@ -42,6 +42,7 @@ HashTable.prototype.remove = function(k){
         this.resize(0.5);
       }
     }
+
   }
 };
 
