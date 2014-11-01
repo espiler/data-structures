@@ -61,17 +61,6 @@ var binarySearchTreeMethods = {
 
 };
 
-
-var tree = makeBinarySearchTree(5);
-tree.insert(10);
-tree.insert(1);
-tree.insert(15);
-tree.insert(8);
-tree.insert(0);
-tree.insert(3);
-tree.insert(6);
-tree.insert(9);
-
 /*
  * Complexity: What is the time complexity of the above functions?
  depthFirstLog: O(n)
