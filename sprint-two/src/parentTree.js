@@ -35,6 +35,15 @@ treeMethods.contains = function(target){
   return result;
 };
 
+treeMethods.traverse = function(callback){
+  callback(this.value);
+  if (this.children.length > 0){
+    this.children.forEach(function(el){
+      el.traverse(callback);
+    };
+  }
+};
+
 var extend = function(obj1, obj2) {
   for (var key in obj2) {
     obj1[key] = obj2[key];
