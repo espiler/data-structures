@@ -36,13 +36,11 @@ HashTable.prototype.remove = function(k){
   for(var i = 0; i < this._storage[index].length; i++){
     if(this._storage[index][i].key === k){
       this._storage[index].splice(i,1);
-      if (this._storage[index].length === 0) {}
       this._size--;
-      if(this._size <= this._limit * 0.25 && this._limit > 8){
-        this.resize(0.5);
-      }
     }
-
+  }
+  if(this._size <= this._limit * 0.25 && this._limit > 8){
+    this.resize(0.5);
   }
 };
 
